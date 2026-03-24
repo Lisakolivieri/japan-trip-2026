@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a1a2e">
+<title>Japan Trip 2026 🇯🇵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #2d2d44;
+    --cream: #f5f0e8;
+    --cream-dark: #ede6d6;
+    --accent: #c84b31;
+    --gold: #d4a853;
+    --teal: #2a7f7f;
+    --teal-light: #e8f4f4;
+    --muted: #7a7a8c;
+    --paid: #2a7f7f;
+    --unpaid: #c84b31;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(26,26,46,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 48px 24px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '日本';
+    font-family: 'Shippori Mincho', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    right: -10px; top: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .hero-dates {
+    font-size: 14px;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 20px;
+  }
+  .hero-pills {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: rgba(245,240,232,0.8);
+  }
+  .pill.accent { background: rgba(200,75,49,0.25); border-color: rgba(200,75,49,0.4); color: #f4a99a; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    background: var(--ink-light);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .tab {
+    flex: 1; padding: 14px 8px; text-align: center;
+    font-size: 12px; font-weight: 500;
+    color: rgba(245,240,232,0.45);
+    cursor: pointer; border: none; background: none;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .tab.active { color: var(--gold); }
+  .tab.active::after {
+    content: '';
+    position: absolute; bottom: 0; left: 20%; right: 20%;
+    height: 2px; background: var(--gold); border-radius: 2px;
+  }
+  .tab-icon { display: block; font-size: 18px; margin-bottom: 2px; }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 20px 16px 100px; }
+  .panel.active { display: block; }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); margin: 24px 0 12px; font-weight: 600;
+  }
+
+  /* ── DAY CARD ── */
+  .day-card {
+    background: white;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid rgba(26,26,46,0.06);
+  }
+  .day-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-header-left { display: flex; align-items: center; gap: 14px; }
+  .day-dot {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--ink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .day-dot .day-num { font-family: 'Shippori Mincho', serif; font-size: 18px; color: var(--gold); font-weight: 700; line-height: 1; }
+  .day-dot .day-mo { font-size: 9px; color: rgba(245,240,232,0.5); letter-spacing: 1px; text-transform: uppercase; }
+  .day-title { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+  .day-subtitle { font-size: 12px; color: var(--muted); }
+  .day-chevron { font-size: 18px; color: var(--muted); transition: transform 0.25s; }
+  .day-card.open .day-chevron { transform: rotate(180deg); }
+
+  .day-body { display: none; border-top: 1px solid var(--cream-dark); }
+  .day-card.open .day-body { display: block; }
+
+  /* ── EVENTS ── */
+  .event {
+    display: flex; gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--cream-dark);
+    position: relative;
+  }
+  .event:last-child { border-bottom: none; }
+  .event-time-col { width: 54px; flex-shrink: 0; }
+  .event-time { font-size: 11px; color: var(--muted); font-weight: 500; margin-top: 3px; }
+  .event-icon-wrap {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .event-content { flex: 1; min-width: 0; }
+  .event-name { font-weight: 600; font-size: 14px; margin-bottom: 3px; word-break: break-word; }
+  .event-detail { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .event-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .event-tag {
+    font-size: 10px; padding: 3px 10px; border-radius: 20px;
+    font-weight: 500; letter-spacing: 0.3px;
+  }
+  .tag-flight { background: #e8f0fe; color: #1a56db; }
+  .tag-food { background: #fef3e2; color: #b45309; }
+  .tag-stay { background: #e8f4f4; color: var(--teal); }
+  .tag-activity { background: #f3e8ff; color: #7c3aed; }
+  .tag-transport { background: #fce7f3; color: #9d174d; }
+  .tag-work { background: #f0fdf4; color: #166534; }
+  .tag-optional { background: #f9fafb; color: #6b7280; border: 1px dashed #d1d5db; }
+
+  /* cost chip */
+  .cost-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; margin-top: 6px;
+  }
+  .cost-paid { background: #e8f4f4; color: var(--paid); }
+  .cost-unpaid { background: #fef2f2; color: var(--unpaid); }
+  .cost-chip .thb { font-weight: 400; font-size: 10px; color: var(--muted); }
+
+  /* map link */
+  .map-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; color: var(--teal); font-weight: 500;
+    text-decoration: none; margin-top: 7px;
+    padding: 4px 10px; border-radius: 20px;
+    background: var(--teal-light);
+    border: 1px solid rgba(42,127,127,0.15);
+  }
+
+  /* ── BUDGET PANEL ── */
+  .budget-summary {
+    background: var(--ink);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  .budget-summary h2 { font-family: 'Shippori Mincho', serif; font-size: 20px; margin-bottom: 4px; }
+  .budget-rate { font-size: 11px; color: rgba(245,240,232,0.45); margin-bottom: 16px; }
+  .budget-totals { display: flex; gap: 16px; }
+  .budget-total-item { flex: 1; }
+  .budget-total-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 4px; }
+  .budget-total-val { font-family: 'Shippori Mincho', serif; font-size: 24px; font-weight: 700; }
+  .budget-total-val.paid { color: #5ec8c8; }
+  .budget-total-val.unpaid { color: #f4a99a; }
+  .budget-total-sub { font-size: 11px; color: rgba(245,240,232,0.4); }
+
+  .budget-row {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 2px 8px rgba(26,26,46,0.06);
+  }
+  .budget-row-icon { font-size: 20px; }
+  .budget-row-info { flex: 1; min-width: 0; }
+  .budget-row-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .budget-row-day { font-size: 11px; color: var(--muted); }
+  .budget-row-right { text-align: right; }
+  .budget-row-jpy { font-size: 15px; font-weight: 700; }
+  .budget-row-thb { font-size: 11px; color: var(--muted); }
+  .budget-status { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-top: 3px; display: inline-block; }
+  .status-paid { background: #e8f4f4; color: var(--paid); }
+  .status-due { background: #fef2f2; color: var(--unpaid); }
+
+  /* ── INFO PANEL ── */
+  .info-card {
+    background: white; border-radius: var(--radius);
+    padding: 18px; margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .info-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .info-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--cream-dark); font-size: 13px; }
+  .info-row:last-child { border-bottom: none; }
+  .info-row-label { color: var(--muted); }
+  .info-row-val { font-weight: 500; text-align: right; }
+
+  /* ── PEOPLE ── */
+  .people-row { display: flex; gap: 10px; margin-bottom: 16px; }
+  .person-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: white; border-radius: 30px; padding: 8px 16px 8px 8px;
+    box-shadow: var(--shadow); font-size: 13px; font-weight: 500;
+  }
+  .person-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; color: white;
+  }
+  .av-me { background: var(--accent); }
+  .av-heidi { background: var(--teal); }
+  .av-francois { background: #7c3aed; }
+
+  /* ── EDIT MODE ── */
+  .edit-fab {
+    position: fixed; bottom: 24px; right: 20px; z-index: 200;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--ink); color: var(--gold);
+    border: 2px solid var(--gold); font-size: 22px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(26,26,46,0.35);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .edit-fab.active { background: var(--accent); border-color: var(--accent); color: white; font-size: 18px; }
+  .edit-banner {
+    display: none;
+    background: var(--gold); color: var(--ink);
+    text-align: center; padding: 8px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+    position: sticky; top: 49px; z-index: 99;
+  }
+  body.edit-mode .edit-banner { display: block; }
+  body.edit-mode .event { cursor: pointer; position: relative; }
+  body.edit-mode .event::after {
+    content: '✏️';
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; opacity: 0.4;
+  }
+  body.edit-mode .event:active { background: #fffbf5; }
+  .edit-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 300;
+    background: rgba(26,26,46,0.6); backdrop-filter: blur(4px);
+    align-items: flex-end; justify-content: center;
+  }
+  .edit-modal-overlay.open { display: flex; }
+  .edit-modal {
+    background: white; border-radius: 24px 24px 0 0;
+    padding: 28px 20px 44px; width: 100%; max-width: 480px;
+    box-shadow: 0 -8px 40px rgba(26,26,46,0.2);
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .edit-modal h3 { font-size: 15px; font-weight: 700; margin-bottom: 18px; }
+  .edit-field { margin-bottom: 14px; }
+  .edit-field label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 600; display: block; margin-bottom: 6px; }
+  .edit-field input, .edit-field textarea {
+    width: 100%; border: 1.5px solid var(--cream-dark); border-radius: 10px;
+    padding: 11px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--ink); background: var(--cream); outline: none;
+    transition: border-color 0.2s;
+  }
+  .edit-field input:focus, .edit-field textarea:focus { border-color: var(--gold); background: white; }
+  .edit-field textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+  .edit-actions { display: flex; gap: 10px; margin-top: 20px; }
+  .btn-save {
+    flex: 1; background: var(--ink); color: var(--gold);
+    border: none; border-radius: 12px; padding: 14px;
+    font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-cancel {
+    background: var(--cream-dark); color: var(--muted);
+    border: none; border-radius: 12px; padding: 14px 20px;
+    font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-delete {
+    background: #fef2f2; color: var(--accent);
+    border: none; border-radius: 12px; padding: 14px 16px;
+    font-size: 20px; cursor: pointer;
+  }
+  .add-event-btn {
+    display: none; width: calc(100% - 36px); margin: 4px 18px 14px;
+    background: none; border: 2px dashed #d1d5db; border-radius: 12px;
+    padding: 12px; font-size: 13px; color: var(--muted); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    transition: all 0.2s;
+  }
+  body.edit-mode .add-event-btn { display: block; }
+  .add-event-btn:hover, .add-event-btn:active { border-color: var(--gold); color: var(--gold); background: #fffdf5; }
+  .edit-saved-toast {
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--gold); padding: 10px 22px;
+    border-radius: 30px; font-size: 13px; font-weight: 600;
+    opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 400;
+    white-space: nowrap;
+  }
+  .edit-saved-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Trip Itinerary</div>
+  <h1>Japan 2026 🇯🇵</h1>
+  <div class="hero-dates">5 Apr – 18 Apr 2026 · Kobe, Onomichi &amp; Shimanami Kaido</div>
+  <div class="hero-pills">
+    <span class="pill">✈️ TG672 BKK→KIX</span>
+    <span class="pill accent">13 nights</span>
+    <span class="pill">👤 Me + Francois + Heidi</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('days')">
+    <span class="tab-icon">📅</span>Days
+  </button>
+  <button class="tab" onclick="switchTab('budget')">
+    <span class="tab-icon">💴</span>Budget
+  </button>
+  <button class="tab" onclick="switchTab('info')">
+    <span class="tab-icon">ℹ️</span>Info
+  </button>
+</div>
+
+<!-- Edit banner -->
+<div class="edit-banner">✏️ Edit mode ON — tap any event to edit it</div>
+
+<!-- Edit FAB -->
+<button class="edit-fab" id="editFab" onclick="toggleEditMode()" title="Toggle edit mode">✏️</button>
+
+<!-- Toast -->
+<div class="edit-saved-toast" id="savedToast">✓ Saved</div>
+
+<!-- Edit Modal -->
+<div class="edit-modal-overlay" id="editOverlay">
+  <div class="edit-modal">
+    <h3 id="editModalTitle">✏️ Edit Event</h3>
+    <div class="edit-field">
+      <label>Time</label>
+      <input type="text" id="editTime" placeholder="e.g. 08:25 or ~19:00">
+    </div>
+    <div class="edit-field">
+      <label>Event Name</label>
+      <input type="text" id="editName" placeholder="Event name">
+    </div>
+    <div class="edit-field">
+      <label>Details</label>
+      <textarea id="editDetail" placeholder="Description / notes"></textarea>
+    </div>
+    <div class="edit-actions">
+      <button class="btn-delete" onclick="deleteEvent()" title="Delete event">🗑️</button>
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveEvent()">Save ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DAYS PANEL ══════════════ -->
+<div id="panel-days" class="panel active">
+
+  <!-- DAY 1 -->
+  <div class="day-card open" id="day1">
+    <div class="day-header" onclick="toggleDay('day1')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">5</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">Departure Day ✈️</div>
+          <div class="day-subtitle">Bangkok → Kobe</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">08:25</div></div>
+        <div class="event-icon-wrap" style="background:#e8f0fe">✈️</div>
+        <div class="event-content">
+          <div class="event-name">TG672 Departs BKK</div>
+          <div class="event-detail">Bangkok Suvarnabhumi · Terminal 1<br>Thai Airways · TG672</div>
+          <div class="event-tags"><span class="event-tag tag-flight">Flight</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">15:55</div></div>
+        <div class="event-icon-wrap" style="background:#e8f0fe">🛬</div>
+        <div class="event-content">
+          <div class="event-name">Arrive Osaka KIX</div>
+          <div class="event-detail">Kansai International Airport</div>
+          <div class="event-tags"><span class="event-tag tag-flight">Flight</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=Kansai+International+Airport" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~16:30</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">🚌</div>
+        <div class="event-content">
+          <div class="event-name">Airport Limousine Bus → 三宮</div>
+          <div class="event-detail">KIX to Kobe 三宮 (Sannomiya), approx 1.5 hrs</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Transport</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~18:15</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🚶</div>
+        <div class="event-content">
+          <div class="event-name">Walk to 元町 · Wait for Heidi</div>
+          <div class="event-detail">Heidi finishes work ~19:30 — explore Motomachi while waiting ☕</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Explore</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=元町+神戸" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~20:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍶</div>
+        <div class="event-content">
+          <div class="event-name">お晩酌 リベロ前</div>
+          <div class="event-detail">Dinner with Heidi 🎉</div>
+          <div class="event-tags"><span class="event-tag tag-food">Dinner</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=お晩酌+リベロ前+神戸" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">アドバンス神戸パーチェ · Heidi's Place</div>
+          <div class="event-detail">Head to Heidi's after dinner</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Accommodation</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=アドバンス神戸パーチェ" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day2">
+    <div class="day-header" onclick="toggleDay('day2')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">6</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">Maiko & Bridge Views 🌊</div>
+          <div class="day-subtitle">Kobe — Maiko · Tarumi</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Lunch</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🐟</div>
+        <div class="event-content">
+          <div class="event-name">垂水漁港食堂</div>
+          <div class="event-detail">Seafood lunch · Tarumi Fishing Port</div>
+          <div class="event-tags"><span class="event-tag tag-food">Lunch</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=垂水漁港食堂+神戸" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Aftn</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🌉</div>
+        <div class="event-content">
+          <div class="event-name">橋の科学館</div>
+          <div class="event-detail">Bridge Science Museum, 舞子<br>Enjoy the Akashi Kaikyo Bridge views</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Activity</span></div>
+          <div class="cost-chip cost-unpaid">¥500 <span class="thb">· ฿103</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=橋の科学館+舞子" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Stay at Heidi's Place</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Accommodation</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day3">
+    <div class="day-header" onclick="toggleDay('day3')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">7</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">WFH + Explore Kobe 💻</div>
+          <div class="day-subtitle">Flexible day</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">AM</div></div>
+        <div class="event-icon-wrap" style="background:#f0fdf4">💻</div>
+        <div class="event-content">
+          <div class="event-name">Work from Home</div>
+          <div class="event-detail">At Heidi's · until ~14:00 JST</div>
+          <div class="event-tags"><span class="event-tag tag-work">Work</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~14:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🏙️</div>
+        <div class="event-content">
+          <div class="event-name">Explore Kobe</div>
+          <div class="event-detail">Flexible afternoon — Kitano, Harbourland, or wherever the mood takes you!</div>
+          <div class="event-tags"><span class="event-tag tag-optional">Flexible</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Stay at Heidi's Place</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Accommodation</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="day4">
+    <div class="day-header" onclick="toggleDay('day4')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">8</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">Hotel Day + Francois Arrives 💇✂️</div>
+          <div class="day-subtitle">Check-in Dormy Inn · Motomachi</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">AM</div></div>
+        <div class="event-icon-wrap" style="background:#f0fdf4">💻</div>
+        <div class="event-content">
+          <div class="event-name">Work from Home</div>
+          <div class="event-detail">At Heidi's · until ~14:00 JST</div>
+          <div class="event-tags"><span class="event-tag tag-work">Work</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~14:00</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">🏨</div>
+        <div class="event-content">
+          <div class="event-name">Dormy Inn Kobe Motomachi</div>
+          <div class="event-detail">Check-in · Natural Hot Springs 🛁</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Hotel</span></div>
+          <div class="cost-chip cost-paid">¥14,309 · <span class="thb">฿2,948</span> · PAID ✓</div>
+          <a class="map-btn" href="https://maps.google.com/?q=Dormy+Inn+Kobe+Motomachi" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">15:30</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">✂️</div>
+        <div class="event-content">
+          <div class="event-name">CHEST 神戸店【チェスト】</div>
+          <div class="event-detail">Hair appointment · 神戸三宮</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Appointment</span></div>
+          <div class="cost-chip cost-unpaid">¥8,740 · <span class="thb">฿1,800</span> · Pay at store</div>
+          <a class="map-btn" href="https://maps.google.com/?q=CHEST+神戸店+三宮" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~19:00</div></div>
+        <div class="event-icon-wrap" style="background:#e8f0fe">🛬</div>
+        <div class="event-content">
+          <div class="event-name">Francois Arrives · 三宮</div>
+          <div class="event-detail">TG672 KIX → bus to Kobe · same route as Day 1</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Meet-up</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~20:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🌾</div>
+        <div class="event-content">
+          <div class="event-name">農家 · Dinner</div>
+          <div class="event-detail">With Heidi & Francois 🎉</div>
+          <div class="event-tags"><span class="event-tag tag-food">Dinner</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=農家+神戸" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Dormy Inn Kobe Motomachi</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Hotel</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="day5">
+    <div class="day-header" onclick="toggleDay('day5')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">9</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">Kobe → Onomichi 🍞🚆</div>
+          <div class="day-subtitle">Bakery · Museum · Seaside town</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">08:30</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🥐</div>
+        <div class="event-content">
+          <div class="event-name">パンやきどころ RIKI</div>
+          <div class="event-detail">Super popular bakery next to hotel — go early! Grab breakfast</div>
+          <div class="event-tags"><span class="event-tag tag-food">Breakfast</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=パンやきどころRIKI+神戸元町" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">10:00</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🪵</div>
+        <div class="event-content">
+          <div class="event-name">竹中大工道具館</div>
+          <div class="event-detail">Takenaka Carpentry Tools Museum · Kobe</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Museum</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=竹中大工道具館+神戸" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~14:00</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">🚆</div>
+        <div class="event-content">
+          <div class="event-name">Train → Onomichi</div>
+          <div class="event-detail">JR from Kobe · approx 2 hrs · arriving ~17:00</div>
+          <div class="event-tags"><span class="event-tag tag-transport">JR Train</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~17:00</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">🏨</div>
+        <div class="event-content">
+          <div class="event-name">Lemonsea Onomichi</div>
+          <div class="event-detail">Check-in · 2 nights</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Hotel</span></div>
+          <div class="cost-chip cost-unpaid">¥40,000 · <span class="thb">฿8,240</span> · Pay at property</div>
+          <a class="map-btn" href="https://maps.google.com/?q=lemonsea+onomichi" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~17:30</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🌆</div>
+        <div class="event-content">
+          <div class="event-name">尾道市役所 屋上展望デッキ</div>
+          <div class="event-detail">Rooftop observation deck · Onomichi City Hall</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Views</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=尾道市役所+屋上展望デッキ" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~19:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🥘</div>
+        <div class="event-content">
+          <div class="event-name">ぽっぽ家</div>
+          <div class="event-detail">Okonomiyaki dinner · Onomichi</div>
+          <div class="event-tags"><span class="event-tag tag-food">Dinner</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=ぽっぽ家+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">After</div></div>
+        <div class="event-icon-wrap" style="background:#f9fafb">♨️</div>
+        <div class="event-content">
+          <div class="event-name">TOTONOI SALON irori</div>
+          <div class="event-detail">Post-dinner option — sauna / relaxation</div>
+          <div class="event-tags"><span class="event-tag tag-optional">Maybe</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=TOTONOI+SALON+irori+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Lemonsea Onomichi</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Hotel</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="day6">
+    <div class="day-header" onclick="toggleDay('day6')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">10</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">Explore Onomichi 🐱⛩️</div>
+          <div class="day-subtitle">Temples · Cafes · Hilltop views</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Morning</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">☕</div>
+        <div class="event-content">
+          <div class="event-name">SEN Coffee</div>
+          <div class="event-detail">Start the day with specialty coffee · Onomichi</div>
+          <div class="event-tags"><span class="event-tag tag-food">Coffee</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=SEN+Coffee+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~10:00</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">🐱</div>
+        <div class="event-content">
+          <div class="event-name">猫の細道 · Cat Alley</div>
+          <div class="event-detail">Wander the famous narrow lane full of stray cats & lucky stone cat sculptures — leads up toward Senkoji</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Walk</span><span class="event-tag tag-optional">💡 Recommended</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=猫の細道+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~10:30</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">⛩️</div>
+        <div class="event-content">
+          <div class="event-name">千光寺 · Senkoji Temple</div>
+          <div class="event-detail">Iconic 9th-century vermilion temple perched on the hillside · heart-shaped ema · great views of the Onomichi Channel</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Temple</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=千光寺+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~11:00</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🌅</div>
+        <div class="event-content">
+          <div class="event-name">千光寺公園 展望台 · Observatory</div>
+          <div class="event-detail">Free panoramic 360° deck at the peak — sweeping views of the town, Onomichi Channel & islands beyond. One of Japan's top 100 cherry blossom spots 🌸 — you may still catch the tail end!</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Views</span><span class="event-tag tag-optional">💡 Don't miss</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=千光寺公園+展望台+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~11:30</div></div>
+        <div class="event-icon-wrap" style="background:#f9fafb">📖</div>
+        <div class="event-content">
+          <div class="event-name">文学のこみち · Path of Literature</div>
+          <div class="event-detail">Walk downhill via this scenic path — poems by famous authors engraved on stones along the way. Gentle descent back toward town.</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Walk</span><span class="event-tag tag-optional">💡 Recommended</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=文学のこみち+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~12:30</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🛕</div>
+        <div class="event-content">
+          <div class="event-name">禅和庵</div>
+          <div class="event-detail">Zen atmosphere · along the temple walk area</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Temple</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=禅和庵+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~13:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">☕</div>
+        <div class="event-content">
+          <div class="event-name">Atmosphere or Totem Cafe</div>
+          <div class="event-detail">Hilltop or hillside cafe stop — whichever you stumble upon first. Both are known for views & good vibes.</div>
+          <div class="event-tags"><span class="event-tag tag-food">Cafe</span><span class="event-tag tag-optional">Flexible</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=Atmosphere+cafe+尾道" target="_blank">📍 Atmosphere</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~14:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🏬</div>
+        <div class="event-content">
+          <div class="event-name">尾道 商店街 · Hondori Arcade</div>
+          <div class="event-detail">1.6km covered shopping street — retro shotengai vibe, old shops converted into cafes, souvenir stores, local crafts & the famous Onomichi Denim Project</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Shopping</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=尾道本通り商店街" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Aftn</div></div>
+        <div class="event-icon-wrap" style="background:#e8f0fe">🚢</div>
+        <div class="event-content">
+          <div class="event-name">💡 Bonus: ONOMICHI U2</div>
+          <div class="event-detail">Converted waterfront warehouse — cyclist cafe, Yard Cafe for espresso with harbour views, boutique shops & local products. Great afternoon wind-down spot.</div>
+          <div class="event-tags"><span class="event-tag tag-optional">Optional</span><span class="event-tag tag-food">Cafe</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=ONOMICHI+U2" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Lemonsea Onomichi</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Hotel</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-card" id="day7">
+    <div class="day-header" onclick="toggleDay('day7')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">11</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">🚴 Shimanami Kaido Day 1</div>
+          <div class="day-subtitle">Onomichi → 因島 → 生口島 → 大三島</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Morning</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🥐</div>
+        <div class="event-content">
+          <div class="event-name">Breakfast · Lemonsea Onomichi</div>
+          <div class="event-detail">Hotel breakfast before the big ride</div>
+          <div class="event-tags"><span class="event-tag tag-food">Breakfast</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~08:30</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍞</div>
+        <div class="event-content">
+          <div class="event-name">パン屋 航路</div>
+          <div class="event-detail">Pick up pastries on the way to the bike shop — fuel for the road!</div>
+          <div class="event-tags"><span class="event-tag tag-food">Bakery</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=パン屋航路+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">09:00</div></div>
+        <div class="event-icon-wrap" style="background:#e8f0fe">🚲</div>
+        <div class="event-content">
+          <div class="event-name">Better Bicycles · Bike Pickup</div>
+          <div class="event-detail">Appointment 9:00am · Pick up 2 bikes · Store luggage · Set up SP CONNECT phone mounts · ⚠️ Don't forget bridge toll cash (~¥500 in coins)</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Bike Rental</span></div>
+          <div class="cost-chip cost-unpaid">¥17,600 bikes (3 days) · <span class="thb">฿3,626</span> + ¥3,300 mounts (3 days) · <span class="thb">฿680</span> · Pay at store</div>
+          <a class="map-btn" href="https://maps.google.com/?q=Better+Bicycles+Onomichi" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~09:30</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">⛴️</div>
+        <div class="event-content">
+          <div class="event-name">Ferry: Onomichi → 向島 (Mukaishima)</div>
+          <div class="event-detail">Short 5-min ferry crossing from Onomichi Port · ¥110/person with bike · Marks the start of the ride! 🎉</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Ferry</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 Start · 0 km</div>
+          <div class="cost-chip cost-unpaid">¥110 pp · <span class="thb">฿23</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~10:30</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">🦕</div>
+        <div class="event-content">
+          <div class="event-name">因島大橋 下 · Dinosaur Park</div>
+          <div class="event-detail">Innoshima Shimanami Beach park — right after descending from Innoshima Bridge. Stretch the legs, snap a photo with the giant random white dinosaur 🦕 Beach cafe on site if you need a drink.</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Quick stop</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 ~20 km cumulative</div>
+          <a class="map-btn" href="https://maps.google.com/?q=因島大橋記念公園+因島" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~11:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍊</div>
+        <div class="event-content">
+          <div class="event-name">はっさく屋 · Hassaku Daifuku</div>
+          <div class="event-detail">因島's most famous snack — mochi stuffed with fresh hassaku citrus, the fruit invented on this island. Right near the bridge park. ⚠️ Can sell out — grab early!</div>
+          <div class="event-tags"><span class="event-tag tag-food">Must try ⭐</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 ~21 km cumulative</div>
+          <a class="map-btn" href="https://maps.google.com/?q=はっさく屋+因島" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~12:30</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍋</div>
+        <div class="event-content">
+          <div class="event-name">生口島 瀬戸田 老街</div>
+          <div class="event-detail">Arrive Setoda · Browse Shimanami Roman & 向栄堂菓子店 · 💡 Also try: Dolce gelato (famous lemon & salt-orange) · Kosanji Temple if time allows</div>
+          <div class="event-tags"><span class="event-tag tag-food">Lunch stop</span><span class="event-tag tag-activity">Explore</span></div>
+          <div style="font-size:11px;color:#2a7f7f;margin-top:6px">⏱️ Arrival now a relaxed ~12:00–12:30 without the 白滝 detour 🎉</div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:3px">📏 ~35 km cumulative</div>
+          <a class="map-btn" href="https://maps.google.com/?q=Shimanami+Roman+瀬戸田" target="_blank">📍 Shimanami Roman</a>
+          <a class="map-btn" href="https://maps.google.com/?q=向栄堂菓子店+瀬戸田" target="_blank">📍 向栄堂</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">After lunch</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🐟</div>
+        <div class="event-content">
+          <div class="event-name">ナチュラルグリーンファーム · たい焼き</div>
+          <div class="event-detail">生口島 · Don't leave the island without one! 🐟</div>
+          <div class="event-tags"><span class="event-tag tag-food">Must buy ⭐</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=ナチュラルグリーンファーム+生口島+尾道" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~14:00</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">🌉</div>
+        <div class="event-content">
+          <div class="event-name">多々羅大橋 → 大三島</div>
+          <div class="event-detail">Cross the iconic Tatara Bridge (cable-stayed, one of world's longest) from Ikuchijima into Omishima · listen for the "Singing Dragon" sound under the pylons 🐉</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Bridge crossing</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 ~43 km cumulative</div>
+          <a class="map-btn" href="https://maps.google.com/?q=多々羅大橋" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~14:30</div></div>
+        <div class="event-icon-wrap" style="background:#f9fafb">🛣️</div>
+        <div class="event-content">
+          <div class="event-name">大三島 ルート選択 · Choose your path</div>
+          <div style="margin-top:8px;padding:10px 12px;background:#f0fdf4;border-radius:10px;border-left:3px solid #2a7f7f;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:#2a7f7f;margin-bottom:4px">🔵 Blue Line (standard route)</div>
+            <div style="font-size:12px;color:#444;line-height:1.5">~7–8 km · ~30 min riding<br>Hugs the southeast coast from Tatara Bridge base, straight to Omishima Bridge ramp. Fast, flat, easy.</div>
+          </div>
+          <div style="margin-top:8px;padding:10px 12px;background:#fef9ec;border-radius:10px;border-left:3px solid #d4a853;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700;color:#b45309;margin-bottom:4px">🟢 Route 51 South Coast Half-Loop</div>
+            <div style="font-size:12px;color:#444;line-height:1.5">~20–22 km · ~1.5–2 hrs riding<br>Turns south onto Rt. 51 after the bridge, high above the coast with citrus orchards &amp; sea views. Features the famous <b>"Yahoo! Hill"</b> (nickname only — not on Google Maps) — also called "Lightning Bolt Hill", an S-curve descent near the Toyo Ito Museum of Architecture that's so fun riders scream "Yahoo!" going down. Intermediate level with long climbs.</div>
+          </div>
+          <div style="font-size:11px;color:#c84b31;font-weight:600;margin-top:6px">⏱️ Blue line → Airbnb by ~15:00, loads of time for sunset & rest 🌅<br>South loop → arrival ~17:00–17:30, still comfortable before 18:30 dinner!</div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 🔵 Total Day 1: ~50 km &nbsp;|&nbsp; 🟢 South loop: ~63 km</div>
+          <div class="event-tags"><span class="event-tag tag-optional">Decide on the day 🎲</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~15:00</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">🏡</div>
+        <div class="event-content">
+          <div class="event-name">Airbnb Check-in · 大三島</div>
+          <div class="event-detail">2572 Ōmishimachō Ōmi, Imabari, Ehime 794-1302 · Freshen up before sunset & dinner 🚿</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Airbnb</span></div>
+          <div class="cost-chip cost-paid">฿4,845 · PAID ✓ (paid 29 Mar)</div>
+          <a class="map-btn" href="https://maps.google.com/?q=2572+Omishimacho+Omi+Imabari+Ehime" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~18:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🌅</div>
+        <div class="event-content">
+          <div class="event-name">Sunset · 大三島</div>
+          <div class="event-detail">Sunset ~18:30–19:00 in early April · fingers crossed for clear skies 🤞</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Views</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">18:30</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍷</div>
+        <div class="event-content">
+          <div class="event-name">Umimachi Bal Ameri · Dinner</div>
+          <div class="event-detail">Reservation 18:30 · 大三島</div>
+          <div class="event-tags"><span class="event-tag tag-food">Dinner</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=Umimachi+Bal+Ameri+大三島" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Airbnb · 大三島</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Accommodation</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day-card" id="day8">
+    <div class="day-header" onclick="toggleDay('day8')">
+      <div class="day-header-left">
+        <div class="day-dot"><span class="day-num">12</span><span class="day-mo">Apr</span></div>
+        <div>
+          <div class="day-title">🚴 Shimanami Day 2 · 大三島→大島</div>
+          <div class="day-subtitle">伯方島 · 大島 · 亀老山展望公園</div>
+        </div>
+      </div>
+      <span class="day-chevron">⌄</span>
+    </div>
+    <div class="day-body">
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Morning</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">🏡</div>
+        <div class="event-content">
+          <div class="event-name">Check-out · Airbnb 大三島 (Night 1)</div>
+          <div class="event-detail">2572 Ōmishimachō Ōmi, Imabari, Ehime 794-1302</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Check-out</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~08:30</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍳</div>
+        <div class="event-content">
+          <div class="event-name">SHIMANAMI KITCHEN · Breakfast</div>
+          <div class="event-detail">Newly opened · Inokuchi area, 大三島 · Head there after checkout — it's on the way north toward 大三島橋</div>
+          <div class="event-tags"><span class="event-tag tag-food">Breakfast</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=SHIMANAMI+KITCHEN+大三島" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">09:30</div></div>
+        <div class="event-icon-wrap" style="background:#e8f0fe">🚲</div>
+        <div class="event-content">
+          <div class="event-name">Start riding · Blue Line north</div>
+          <div class="event-detail">Start: 2572 Ōmishimachō Ōmi (east coast 大三島) → 大三島橋 → 伯方島 → Hakata-Oshima Bridge → 大島 · loop all the way back to 大三島 tonight<br>📱 Use Google Maps from your exact start point for accurate leg distances</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Cycling</span></div>
+          <div style="font-size:11px;color:#c84b31;font-weight:600;margin-top:5px">⚠️ Big day with 亀老山 climb — check total on Google Maps before setting off!</div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:3px">📏 Start · 0 km</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~10:00</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">🌉</div>
+        <div class="event-content">
+          <div class="event-name">大三島橋 → 伯方島</div>
+          <div class="event-detail">Short arch bridge · Quick pass through 伯方島 (~4km on blue line)</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Bridge</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 ~10 km cumulative (est.)</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~10:30</div></div>
+        <div class="event-icon-wrap" style="background:#fce7f3">🌉</div>
+        <div class="event-content">
+          <div class="event-name">伯方・大島大橋 → 大島</div>
+          <div class="event-detail">Two bridges connected by tiny Mushijima island · Enter 大島, the last island before Imabari 🎉</div>
+          <div class="event-tags"><span class="event-tag tag-transport">Bridge</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 ~13 km cumulative (est.)</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~11:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🦪</div>
+        <div class="event-content">
+          <div class="event-name">道の駅 よしうみいきいき館 · Lunch</div>
+          <div class="event-detail">~22–24km from Airbnb · ~1.5 hrs riding · Famous for DIY seafood BBQ — pick live shellfish from the tank (scallops, oysters, turban shells) and grill on a 七輪 shichirin! ~¥2,000–4,000pp. One of the best lunch stops on the whole route 🔥</div>
+          <div class="event-tags"><span class="event-tag tag-food">Lunch ⭐</span></div>
+          <div style="font-size:11px;color:#2a7f7f;margin-top:6px">⏱️ Estimated arrival ~11:00–11:30 · Lunch ~1 hr → depart ~12:30</div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:3px">📏 ~24 km cumulative (est.)</div>
+          <a class="map-btn" href="https://maps.google.com/?q=道の駅よしうみいきいき館+大島" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~12:30</div></div>
+        <div class="event-icon-wrap" style="background:#f3e8ff">⛰️</div>
+        <div class="event-content">
+          <div class="event-name">亀老山展望公園 · Detour</div>
+          <div class="event-detail">307m summit · Designed by architect Kuma Kengo · Ranked #2 best view in Japan on TripAdvisor 2016 · Overlooking the Kurushima Straits triple suspension bridge</div>
+          <div style="margin-top:8px;padding:10px 12px;background:#fef9ec;border-radius:10px;border-left:3px solid #d4a853;margin-bottom:6px">
+            <div style="font-size:12px;font-weight:700;color:#b45309;margin-bottom:4px">⚠️ The climb is seriously hard</div>
+            <div style="font-size:12px;color:#444;line-height:1.6">~3–4km from entrance · avg 8° gradient, 10°+ near top · <b>Ride what you can, walk the rest</b> — most rental bike cyclists walk at least part of it<br>Up: ~45–60 min · Summit: ~20–30 min · Down: ~15 min<br>Total detour: <b>~2 hrs</b></div>
+          </div>
+          <div style="font-size:11px;color:#2a7f7f;font-weight:600">⏱️ Depart ~12:30 → summit ~13:30 → back down ~14:15 → ride back to 大三島</div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:3px">📏 ~32 km cumulative inc. detour (est.)</div>
+          <div class="event-tags"><span class="event-tag tag-activity">Viewpoint ⭐</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=亀老山展望公園+大島+今治" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">~16:00</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">🏡</div>
+        <div class="event-content">
+          <div class="event-name">Check-in · Airbnb 大三島 (Night 2)</div>
+          <div class="event-detail">7074-16 Kamiurachō Inokuchi, Imabari, Ehime 794-1402 · Different Airbnb, same island!</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Check-in</span></div>
+          <div style="font-size:11px;font-weight:600;color:#7c3aed;margin-top:5px">📏 ~55 km total for the day (est.) ⚠️ verify on Google Maps</div>
+          <div class="cost-chip cost-unpaid">฿6,275 · Pay 3 Apr</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Before 17:00</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍕</div>
+        <div class="event-content">
+          <div class="event-name">Pizzeria TAKIBI · Takeout pickup</div>
+          <div class="event-detail">5786 Kamiuracho Inokuchi — minutes from the Airbnb, same neighbourhood on 大三島! Closes 5pm ⚠️</div>
+          <div class="event-tags"><span class="event-tag tag-food">Takeout Dinner</span></div>
+          <a class="map-btn" href="https://maps.google.com/?q=5786+Kamiuracho+Inokuchi+Imabari+Ehime" target="_blank">📍 Map</a>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Evening</div></div>
+        <div class="event-icon-wrap" style="background:#fef3e2">🍕</div>
+        <div class="event-content">
+          <div class="event-name">Dinner · TAKIBI pizza at the Airbnb</div>
+          <div class="event-detail">Well-deserved after a big riding day! 🍕🚴</div>
+          <div class="event-tags"><span class="event-tag tag-food">Dinner</span></div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time-col"><div class="event-time">Night</div></div>
+        <div class="event-icon-wrap" style="background:#e8f4f4">😴</div>
+        <div class="event-content">
+          <div class="event-name">Airbnb · 大三島 (Night 2)</div>
+          <div class="event-tags"><span class="event-tag tag-stay">Accommodation</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end panel-days -->
+
+<!-- ══════════════ BUDGET PANEL ══════════════ -->
+<div id="panel-budget" class="panel">
+
+  <div class="budget-summary">
+    <h2>Budget Overview 💴</h2>
+    <div class="budget-rate">Rate: ¥100 = ฿20.6 (as of Mar 24, 2026)</div>
+    <div class="budget-totals">
+      <div class="budget-total-item">
+        <div class="budget-total-label">Already Paid</div>
+        <div class="budget-total-val paid">¥14,309</div>
+        <div class="budget-total-sub">฿70,123 (inc. flights)</div>
+      </div>
+      <div class="budget-total-item">
+        <div class="budget-total-label">Still to Pay</div>
+        <div class="budget-total-val unpaid">¥70,690</div>
+        <div class="budget-total-sub">฿14,562</div>
+      </div>
+      <div class="budget-total-item">
+        <div class="budget-total-label">Total Tracked</div>
+        <div class="budget-total-val" style="color:var(--gold)">¥84,999</div>
+        <div class="budget-total-sub">฿84,685</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Flights</div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">✈️</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">TG672 BKK ↔ KIX · Round Trip × 2</div>
+      <div class="budget-row-day">฿31,165 per person · 2 pax</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">—</div>
+      <div class="budget-row-thb">฿62,330</div>
+      <span class="budget-status status-paid">✓ PAID</span>
+    </div>
+  </div>
+
+  <div class="section-label">Accommodation</div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">🏨</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">Dormy Inn Kobe Motomachi</div>
+      <div class="budget-row-day">Apr 8 · Kobe</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">¥14,309</div>
+      <div class="budget-row-thb">฿2,948</div>
+      <span class="budget-status status-paid">✓ PAID</span>
+    </div>
+  </div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">🍋</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">Lemonsea Onomichi</div>
+      <div class="budget-row-day">Apr 9–10 · 2 nights</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">¥40,000</div>
+      <div class="budget-row-thb">฿8,240</div>
+      <span class="budget-status status-due">PAY AT PROPERTY</span>
+    </div>
+  </div>
+
+  <div class="section-label">Activities & Appointments</div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">🌉</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">橋の科学館</div>
+      <div class="budget-row-day">Apr 6 · Bridge Exhibition Center</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">¥500</div>
+      <div class="budget-row-thb">฿103</div>
+      <span class="budget-status status-due">PAY AT VENUE</span>
+    </div>
+  </div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">✂️</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">CHEST 神戸店 · Hair</div>
+      <div class="budget-row-day">Apr 8 · 15:30</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">¥8,740</div>
+      <div class="budget-row-thb">฿1,800</div>
+      <span class="budget-status status-due">PAY AT STORE</span>
+    </div>
+  </div>
+
+  <div class="section-label">Cycling · 岛波海道</div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">🚲</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">Better Bicycles · 2 bikes × 3 days</div>
+      <div class="budget-row-day">Apr 11–13 · Onomichi</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">¥17,600</div>
+      <div class="budget-row-thb">฿3,626</div>
+      <span class="budget-status status-due">PAY AT STORE</span>
+    </div>
+  </div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">📱</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">SP CONNECT mounts × 2 × 3 days</div>
+      <div class="budget-row-day">¥550/day/mount × 6 days total</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">¥3,300</div>
+      <div class="budget-row-thb">฿680</div>
+      <span class="budget-status status-due">PAY AT STORE</span>
+    </div>
+  </div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">🏡</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">Airbnb · 大三島 · 2 nights</div>
+      <div class="budget-row-day">Apr 11–12 · Omishima, Imabari</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">—</div>
+      <div class="budget-row-thb">฿4,845</div>
+      <span class="budget-status status-paid">✓ PAID (29 Mar)</span>
+    </div>
+  </div>
+
+  <div class="budget-row">
+    <div class="budget-row-icon">🏡</div>
+    <div class="budget-row-info">
+      <div class="budget-row-name">Airbnb · 大島 · 1 night</div>
+      <div class="budget-row-day">Apr 12 · Kamiurachō Inokuchi, Imabari</div>
+    </div>
+    <div class="budget-row-right">
+      <div class="budget-row-jpy">—</div>
+      <div class="budget-row-thb">฿6,275</div>
+      <span class="budget-status status-due">PAY 3 APR</span>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:28px; font-size:9px; color:#bbb">* Flights, food, transport, and tips not yet included. Exchange rate indicative only.</div>
+
+</div><!-- end panel-budget -->
+
+<!-- ══════════════ INFO PANEL ══════════════ -->
+<div id="panel-info" class="panel">
+
+  <div class="section-label">Travel Companions</div>
+  <div class="people-row">
+    <div class="person-chip"><div class="person-avatar av-me">🙋</div>Me</div>
+    <div class="person-chip"><div class="person-avatar av-heidi">H</div>Heidi</div>
+    <div class="person-chip"><div class="person-avatar av-francois">F</div>Francois</div>
+  </div>
+
+  <div class="section-label">Flight</div>
+  <div class="info-card">
+    <h3>✈️ TG672 · Thai Airways</h3>
+    <div class="info-row"><span class="info-row-label">Route</span><span class="info-row-val">BKK (T1) → KIX</span></div>
+    <div class="info-row"><span class="info-row-label">Departs</span><span class="info-row-val">5 Apr · 08:25</span></div>
+    <div class="info-row"><span class="info-row-label">Arrives</span><span class="info-row-val">5 Apr · 15:55</span></div>
+    <div class="info-row"><span class="info-row-label">Francois</span><span class="info-row-val">Same flight · 8 Apr</span></div>
+  </div>
+
+  <div class="section-label">Accommodation</div>
+  <div class="info-card">
+    <h3>🏠 アドバンス神戸パーチェ · Heidi's</h3>
+    <div class="info-row"><span class="info-row-label">Nights</span><span class="info-row-val">Apr 5, 6, 7</span></div>
+  </div>
+  <div class="info-card">
+    <h3>🏨 Dormy Inn Kobe Motomachi</h3>
+    <div class="info-row"><span class="info-row-label">Check-in</span><span class="info-row-val">Apr 8</span></div>
+    <div class="info-row"><span class="info-row-label">Check-out</span><span class="info-row-val">Apr 9</span></div>
+    <div class="info-row"><span class="info-row-label">Cost</span><span class="info-row-val">¥14,309 · PAID ✓</span></div>
+    <div class="info-row"><span class="info-row-label">Feature</span><span class="info-row-val">Natural Hot Springs ♨️</span></div>
+  </div>
+  <div class="info-card">
+    <h3>🍋 Lemonsea Onomichi</h3>
+    <div class="info-row"><span class="info-row-label">Check-in</span><span class="info-row-val">Apr 9</span></div>
+    <div class="info-row"><span class="info-row-label">Check-out</span><span class="info-row-val">Apr 11</span></div>
+    <div class="info-row"><span class="info-row-label">Cost</span><span class="info-row-val">¥40,000 · Pay at property</span></div>
+    <div class="info-row"><span class="info-row-label">Booked via</span><span class="info-row-val">Booking.com</span></div>
+  </div>
+
+  <div class="section-label">Currency</div>
+  <div class="info-card">
+    <h3>💴 Exchange Rate</h3>
+    <div class="info-row"><span class="info-row-label">Rate used</span><span class="info-row-val">¥100 = ฿20.6</span></div>
+    <div class="info-row"><span class="info-row-label">As of</span><span class="info-row-val">24 Mar 2026</span></div>
+    <div class="info-row"><span class="info-row-label">Note</span><span class="info-row-val">Indicative only</span></div>
+  </div>
+
+</div><!-- end panel-info -->
+
+<script>
+  // ── TAB + DAY TOGGLE ──
+  function switchTab(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function toggleDay(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  // ── EDIT MODE STATE ──
+  let editMode = false;
+  let currentEvent = null;
+
+  function toggleEditMode() {
+    editMode = !editMode;
+    document.body.classList.toggle('edit-mode', editMode);
+    const fab = document.getElementById('editFab');
+    fab.textContent = editMode ? '✕' : '✏️';
+    fab.classList.toggle('active', editMode);
+    if (editMode) attachEventListeners();
+    else detachEventListeners();
+  }
+
+  function attachEventListeners() {
+    document.querySelectorAll('.event').forEach(ev => {
+      ev.addEventListener('click', onEventClick);
+    });
+    // Add "＋ Add event" buttons inside each open day body
+    document.querySelectorAll('.day-body').forEach(body => {
+      if (!body.querySelector('.add-event-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'add-event-btn';
+        btn.textContent = '＋ Add event to this day';
+        btn.addEventListener('click', () => openAddModal(body));
+        body.appendChild(btn);
+      }
+    });
+  }
+
+  function detachEventListeners() {
+    document.querySelectorAll('.event').forEach(ev => {
+      ev.removeEventListener('click', onEventClick);
+    });
+  }
+
+  // ── OPEN EDIT MODAL for existing event ──
+  function onEventClick(e) {
+    if (!editMode) return;
+    e.stopPropagation();
+    currentEvent = this;
+    const name = this.querySelector('.event-name')?.innerText || '';
+    const detail = this.querySelector('.event-detail')?.innerText || '';
+    const time = this.querySelector('.event-time')?.innerText || '';
+    document.getElementById('editModalTitle').textContent = '✏️ Edit Event';
+    document.getElementById('editName').value = name;
+    document.getElementById('editDetail').value = detail;
+    document.getElementById('editTime').value = time;
+    document.getElementById('editOverlay').classList.add('open');
+    // show delete button for existing events
+    document.querySelector('.btn-delete').style.display = 'block';
+  }
+
+  // ── OPEN ADD MODAL for new event ──
+  function openAddModal(dayBody) {
+    currentEvent = null;
+    document.getElementById('editModalTitle').textContent = '＋ Add Event';
+    document.getElementById('editName').value = '';
+    document.getElementById('editDetail').value = '';
+    document.getElementById('editTime').value = '';
+    document.querySelector('.btn-delete').style.display = 'none';
+    // store target day body for insertion
+    document.getElementById('editOverlay')._targetBody = dayBody;
+    document.getElementById('editOverlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('editOverlay').classList.remove('open');
+    currentEvent = null;
+  }
+
+  // ── SAVE ──
+  function saveEvent() {
+    const name = document.getElementById('editName').value.trim();
+    const detail = document.getElementById('editDetail').value.trim();
+    const time = document.getElementById('editTime').value.trim();
+
+    if (currentEvent) {
+      // Edit existing
+      const nameEl = currentEvent.querySelector('.event-name');
+      const detailEl = currentEvent.querySelector('.event-detail');
+      const timeEl = currentEvent.querySelector('.event-time');
+      if (nameEl) nameEl.innerText = name;
+      if (detailEl) detailEl.innerText = detail;
+      if (timeEl) timeEl.innerText = time;
+    } else {
+      // Add new event
+      const overlay = document.getElementById('editOverlay');
+      const targetBody = overlay._targetBody;
+      const newEvent = document.createElement('div');
+      newEvent.className = 'event';
+      newEvent.innerHTML = `
+        <div class="event-time-col"><div class="event-time">${time}</div></div>
+        <div class="event-icon-wrap" style="background:#f9fafb">📌</div>
+        <div class="event-content">
+          <div class="event-name">${name}</div>
+          <div class="event-detail">${detail}</div>
+        </div>`;
+      // Insert before the add-event-btn
+      const addBtn = targetBody.querySelector('.add-event-btn');
+      targetBody.insertBefore(newEvent, addBtn);
+      // Attach listener to new event
+      newEvent.addEventListener('click', onEventClick);
+    }
+
+    closeModal();
+    showToast('✓ Saved!');
+    persistChanges();
+  }
+
+  // ── DELETE ──
+  function deleteEvent() {
+    if (!currentEvent) return;
+    if (confirm('Delete this event?')) {
+      currentEvent.remove();
+      closeModal();
+      showToast('🗑️ Deleted');
+      persistChanges();
+    }
+  }
+
+  // ── PERSIST to localStorage ──
+  function persistChanges() {
+    try {
+      const html = document.getElementById('panel-days').innerHTML;
+      localStorage.setItem('japan2026_days', html);
+    } catch(e) {}
+  }
+
+  function loadSavedChanges() {
+    try {
+      const saved = localStorage.getItem('japan2026_days');
+      if (saved) document.getElementById('panel-days').innerHTML = saved;
+    } catch(e) {}
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('savedToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  // ── CLOSE modal on overlay tap ──
+  document.getElementById('editOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ── LOAD saved on startup ──
+  window.addEventListener('DOMContentLoaded', loadSavedChanges);
+</script>
+</body>
+</html>
