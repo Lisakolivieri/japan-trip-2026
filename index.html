@@ -371,9 +371,7 @@
   <button class="tab active" onclick="switchTab('days')">
     <span class="tab-icon">📅</span>Days
   </button>
-  <button class="tab" onclick="switchTab('budget')">
-    <span class="tab-icon">💴</span>Budget
-  </button>
+
   <button class="tab" onclick="switchTab('info')">
     <span class="tab-icon">ℹ️</span>Info
   </button>
@@ -597,7 +595,7 @@
       <div class="day-header-left">
         <div class="day-dot"><span class="day-num">8</span><span class="day-mo">Apr</span><span class="day-mo" style="font-size:8px;color:#d4a853">水 Wed</span></div>
         <div>
-          <div class="day-title">Hotel Day + Francois Arrives 💇✂️</div>
+          <div class="day-title">Hotel Day + Francois Arrives 🏨</div>
           <div class="day-subtitle">Check-in Dormy Inn · Motomachi</div>
         </div>
       </div>
@@ -1567,199 +1565,6 @@
   </div>
 
 </div><!-- end panel-days -->
-
-<!-- ══════════════ BUDGET PANEL ══════════════ -->
-<div id="panel-budget" class="panel">
-
-  <div class="budget-summary">
-    <h2>Budget Overview 💴</h2>
-    <div class="budget-rate">Rate: ¥100 = ฿20.6 (as of Mar 24, 2026)</div>
-    <div class="budget-totals">
-      <div class="budget-total-item">
-        <div class="budget-total-label">Already Paid</div>
-        <div class="budget-total-val paid">¥14,309</div>
-        <div class="budget-total-sub">฿70,123 (inc. flights)</div>
-      </div>
-      <div class="budget-total-item">
-        <div class="budget-total-label">Still to Pay</div>
-        <div class="budget-total-val unpaid">¥75,400</div>
-        <div class="budget-total-sub">฿21,808</div>
-      </div>
-      <div class="budget-total-item">
-        <div class="budget-total-label">Total Tracked</div>
-        <div class="budget-total-val" style="color:var(--gold)">¥89,709</div>
-        <div class="budget-total-sub">฿91,931</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">Flights</div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">✈️</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">TG672 BKK ↔ KIX · Round Trip × 2</div>
-      <div class="budget-row-day">฿31,165 per person · 2 pax</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">—</div>
-      <div class="budget-row-thb">฿62,330</div>
-      <span class="budget-status status-paid">✓ PAID</span>
-    </div>
-  </div>
-
-  <div class="section-label">Accommodation</div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🏨</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">Dormy Inn Kobe Motomachi</div>
-      <div class="budget-row-day">Apr 8 · Kobe</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥14,309</div>
-      <div class="budget-row-thb">฿2,948</div>
-      <span class="budget-status status-paid">✓ PAID</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🍋</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">Lemonsea Onomichi</div>
-      <div class="budget-row-day">Apr 9–10 · 2 nights</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥40,000</div>
-      <div class="budget-row-thb">฿8,240</div>
-      <span class="budget-status status-due">PAY AT PROPERTY</span>
-    </div>
-  </div>
-
-  <div class="section-label">Activities & Appointments</div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🌉</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">橋の科学館</div>
-      <div class="budget-row-day">Apr 6 · Bridge Exhibition Center</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥500</div>
-      <div class="budget-row-thb">฿103</div>
-      <span class="budget-status status-due">PAY AT VENUE</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🍓</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">井上苺園 · Strawberry Picking</div>
-      <div class="budget-row-day">Apr 13 · 10:00–10:40 · 大三島 · 📧 Confirmed in Gmail</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">—</div>
-      <div class="budget-row-thb">—</div>
-      <span class="budget-status status-due">TBC</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🍳</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">食堂 おわん</div>
-      <div class="budget-row-day">Apr 16 · 10:30 · 2 pax · 📧 Confirmed in Gmail</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥7,000</div>
-      <div class="budget-row-thb">฿1,442</div>
-      <span class="budget-status status-due">PAY AT VENUE</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">✂️</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">Nika beaute【ニカボーテ】</div>
-      <div class="budget-row-day">Apr 16 · 15:00 · Hair</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥7,000</div>
-      <div class="budget-row-thb">฿1,442</div>
-      <span class="budget-status status-due">PAY AT STORE</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🍽️</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">船橋洋品店</div>
-      <div class="budget-row-day">Apr 16 · 20:15 · 2 pax · 食べログ 予約番号 UY84MW3WPC7</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">—</div>
-      <div class="budget-row-thb">—</div>
-      <span class="budget-status status-due">TBC</span>
-    </div>
-  </div>
-
-  <div class="section-label">Cycling · 岛波海道</div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🚲</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">Better Bicycles · 2 bikes × 3 days</div>
-      <div class="budget-row-day">Apr 11–13 · Onomichi</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥17,600</div>
-      <div class="budget-row-thb">฿3,626</div>
-      <span class="budget-status status-due">PAY AT STORE</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">📱</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">SP CONNECT mounts × 2 × 3 days</div>
-      <div class="budget-row-day">¥550/day/mount × 6 days total</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">¥3,300</div>
-      <div class="budget-row-thb">฿680</div>
-      <span class="budget-status status-due">PAY AT STORE</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🏡</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">Airbnb · 大三島 · 2 nights</div>
-      <div class="budget-row-day">Apr 11–12 · Omishima, Imabari</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">—</div>
-      <div class="budget-row-thb">฿4,845</div>
-      <span class="budget-status status-paid">✓ PAID (29 Mar)</span>
-    </div>
-  </div>
-
-  <div class="budget-row">
-    <div class="budget-row-icon">🏡</div>
-    <div class="budget-row-info">
-      <div class="budget-row-name">Airbnb · 大三島 Night 2 · 1 night</div>
-      <div class="budget-row-day">Apr 12 · Kamiurachō Inokuchi, Imabari</div>
-    </div>
-    <div class="budget-row-right">
-      <div class="budget-row-jpy">—</div>
-      <div class="budget-row-thb">฿6,275</div>
-      <span class="budget-status status-due">PAY 3 APR</span>
-    </div>
-  </div>
-
-  <div class="section-label" style="margin-top:28px; font-size:9px; color:#bbb">* Food, local transport, and tips not yet included. Exchange rate indicative only.</div>
-
-</div><!-- end panel-budget -->
 
 <!-- ══════════════ INFO PANEL ══════════════ -->
 <div id="panel-info" class="panel">
